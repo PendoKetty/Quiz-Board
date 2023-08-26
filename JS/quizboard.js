@@ -2,6 +2,7 @@ $(document).ready(function() {
     const quizForm = $('#quiz');
     const submitButton = $('#submit');
     const resultContainer = $('#result');
+    const performanceContainer= $('#performance')
 
     const questions = [
         {
@@ -49,6 +50,7 @@ $(document).ready(function() {
     function showResults() {
         const answerContainers = quizForm.find('.question');
         let score = 0;
+        let scorePercentage=0;
 
         questions.forEach((question, questionNumber) => {
             const selectedOption = answerContainers.eq(questionNumber).find(`input[name=question${questionNumber}]:checked`);
@@ -61,11 +63,25 @@ $(document).ready(function() {
                 answerContainers.eq(questionNumber).css('color', 'red');
             }
         });
+        //console.log(score);
+        resultContainer.html(`Your score is ${score}!`);
+        scorePercentage= (parseInt(score)/parseInt(questions.length))*100;
+        //console.log(scorePercentage);
+        if (scorePercentage>= 80){
+            performanceContainer.html(`You have passed excellently!`);
+        }
+        else{
+            if (scorePercentage<80 && scorePercentage <=50){
+                performanceContainer.html(`You have passed fairly!`);
+            }
+            if (scorePercentage<50){
+                performanceContainer.html(`You have failed!You need to retake the test`);
+            }
+        }
 
-        resultContainer.html(`You score is ${score}!`);
+
     }
 
     submitButton.click(showResults);
-
     buildQuiz();
 });

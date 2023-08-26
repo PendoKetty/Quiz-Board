@@ -1,9 +1,10 @@
-const quizContainer = document.getElementById('quiz');
-const submitButton = document.getElementById('submit');
-const resultContainer = document.getElementById('result');
+$(document).ready(function() {
+    const quizForm = $('#quiz');
+    const submitButton = $('#submit');
+    const resultContainer = $('#result');
 
-const questions = [
-    {
+    const questions = [
+        {
         question: "What does HTML stand for?",
         options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Text Makeup Language"],
         correctAnswer: 0
@@ -11,60 +12,60 @@ const questions = [
     {
         question: "What is the other name for Javascript?",
         options: ["ECMASCcript", "JS", "I dont' know"],
-        correctAnswer: 2
+        correctAnswer: 1
     },
     {
         question: "Is C++ A low level laanguage?",
         options: ["Yes","No"],
-        correctAnswer: 2
+        correctAnswer: 0
     },
-    
-];
+    ];
 
-function buildQuiz() {
-    let output = '';
+    function buildQuiz() {
+        let output = '';
 
-    questions.forEach((question, questionNumber) => {
-        const options = [];
-        for (let i = 0; i < question.options.length; i++) {
-            options.push(
-                `<div class="form-check">
-                    <input class="form-check-input" type="radio" name="question${questionNumber}" id="q${questionNumber}option${i}" value="${i}">
-                    <label class="form-check-label" for="q${questionNumber}option${i}">
-                        ${question.options[i]}
-                    </label>
-                </div>`
-            );
-        }
+        questions.forEach((question, questionNumber) => {
+            const options = [];
+            for (let i = 0; i < question.options.length; i++) {
+                options.push(
+                    `<div class="form-check">
+                        <input class="form-check-input" type="radio" name="question${questionNumber}" id="q${questionNumber}option${i}" value="${i}">
+                        <label class="form-check-label" for="q${questionNumber}option${i}">
+                            ${question.options[i]}
+                        </label>
+                    </div>`
+                );
+            }
 
-        output += `<div class="question mt-3">
-                    <h3>${question.question}</h3>
-                    ${options.join('')}
-                </div>`;
-    });
+            output += `<div class="question mt-4">
+                        <h4>${question.question}</h4>
+                        ${options.join('')}
+                    </div>`;
+        });
 
-    quizContainer.innerHTML = output;
-}
+        quizForm.html(output);
+    }
 
-function showResults() {
-    const answerContainers = quizContainer.querySelectorAll('.question');
-    let score = 0;
+    function showResults() {
+        const answerContainers = quizForm.find('.question');
+        let score = 0;
 
-    questions.forEach((question, questionNumber) => {
-        const selectedOption = answerContainers[questionNumber].querySelector(`input[name=question${questionNumber}]:checked`);
-        const selectedAnswer = selectedOption ? parseInt(selectedOption.value) : -1;
+        questions.forEach((question, questionNumber) => {
+            const selectedOption = answerContainers.eq(questionNumber).find(`input[name=question${questionNumber}]:checked`);
+            const selectedAnswer = selectedOption.length > 0 ? parseInt(selectedOption.val()) : -1;
 
-        if (selectedAnswer === question.correctAnswer) {
-            score++;
-            answerContainers[questionNumber].style.color = 'green';
-        } else {
-            answerContainers[questionNumber].style.color = 'red';
-        }
-    });
+            if (selectedAnswer === question.correctAnswer) {
+                score++;
+                //answerContainers.eq(questionNumber).css('color', 'green');
+            } else {
+                answerContainers.eq(questionNumber).css('color', 'red');
+            }
+        });
 
-    resultContainer.innerHTML = `You scored ${score} out of ${questions.length} questions correctly.`;
-}
+        resultContainer.html(`You score is ${score}!`);
+    }
 
-submitButton.addEventListener('click', showResults);
+    submitButton.click(showResults);
 
-buildQuiz();
+    buildQuiz();
+});

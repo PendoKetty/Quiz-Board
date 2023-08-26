@@ -4,6 +4,7 @@ $(document).ready(function() {
     const resultContainer = $('#result');
     const performanceContainer= $('#performance')
 
+    //Questions, multiple choices and position of correct answer
     const questions = [
         {
         question: "What does HTML stand for?",
@@ -60,11 +61,11 @@ $(document).ready(function() {
                 score++;
                 //answerContainers.eq(questionNumber).css('color', 'green');
             } else {
-                answerContainers.eq(questionNumber).css('color', 'red');
+                //answerContainers.eq(questionNumber).css('color', 'red');
             }
         });
         //console.log(score);
-        resultContainer.html(`Your score is ${score}!`);
+        resultContainer.html(`Your score is ${scorePercentage}%`);
         scorePercentage= (parseInt(score)/parseInt(questions.length))*100;
         //console.log(scorePercentage);
         if (scorePercentage>= 80){
@@ -75,10 +76,9 @@ $(document).ready(function() {
                 performanceContainer.html(`You have passed fairly!`);
             }
             if (scorePercentage<50){
-                performanceContainer.html(`You have failed!You need to retake the test`);
+                performanceContainer.html(`You have failed!You need to retake the test.`);
             }
         }
-
 
     }
 

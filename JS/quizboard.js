@@ -87,4 +87,10 @@ $(document).ready(function() {
 
     submitButton.click(showResults);
     buildQuiz();
+    
+    resitButton.click(function() {
+        location.reload(); // Reload the page when the resit button is clicked
+    });
+
+
 });

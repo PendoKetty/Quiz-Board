@@ -4,7 +4,11 @@ h1{
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url("../images/african.png");
+    background-image: url("../images/african1.png");
+    height: 100%;
     margin: 0;
     padding: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

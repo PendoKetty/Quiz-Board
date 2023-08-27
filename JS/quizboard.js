@@ -3,6 +3,7 @@ $(document).ready(function() {
     const submitButton = $('#submit');
     const resultContainer = $('#result');
     const performanceContainer= $('#performance')
+    const resitButton = $('#resit');
 
     //Questions, multiple choices and position of correct answer
     const questions = [
@@ -49,6 +50,7 @@ $(document).ready(function() {
     }
 
     function showResults() {
+        submitButton.hide();
         const answerContainers = quizForm.find('.question');
         let score = 0;
         let scorePercentage=0;
@@ -65,18 +67,19 @@ $(document).ready(function() {
         });
         quizForm.empty();
         //console.log(score);
-        resultContainer.html(`Your score is ${scorePercentage}%`);
         scorePercentage= (parseInt(score)/parseInt(questions.length))*100;
+        resultContainer.html(`Your score is ${scorePercentage}%`);
         //console.log(scorePercentage);
         if (scorePercentage>= 80){
             performanceContainer.html(`You have passed excellently!`);
         }
         else{
-            if (scorePercentage<80 && scorePercentage <=50){
+            if (scorePercentage<80 && scorePercentage >=50){
                 performanceContainer.html(`You have passed fairly!`);
             }
             if (scorePercentage<50){
                 performanceContainer.html(`You have failed!You need to retake the test.`);
+                resitButton.show();
             }
         }
 

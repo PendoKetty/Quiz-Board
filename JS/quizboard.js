@@ -64,6 +64,8 @@ $(document).ready(function() {
                 //answerContainers.eq(questionNumber).css('color', 'red');
             }
         });
+        quizForm.empty();
+        //submitButton.style.display = "none";
         //console.log(score);
         resultContainer.html(`Your score is ${scorePercentage}%`);
         scorePercentage= (parseInt(score)/parseInt(questions.length))*100;

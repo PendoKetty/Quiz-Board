@@ -59,13 +59,11 @@ $(document).ready(function() {
 
             if (selectedAnswer === question.correctAnswer) {
                 score++;
-                //answerContainers.eq(questionNumber).css('color', 'green');
             } else {
-                //answerContainers.eq(questionNumber).css('color', 'red');
+                //
             }
         });
         quizForm.empty();
-        //submitButton.style.display = "none";
         //console.log(score);
         resultContainer.html(`Your score is ${scorePercentage}%`);
         scorePercentage= (parseInt(score)/parseInt(questions.length))*100;
